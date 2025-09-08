@@ -4,8 +4,14 @@
 
 using namespace std;
 
-// TODO: Write the Book struct here
-// struct Book { ... };
+struct Book {
+    
+ char title[100];
+    int pages;
+    int year;
+    char author[100];
+   char isbn[20];
+};
 
 void print_book(int index, const char* title, const char* author, int year, int pages, const char* isbn) {
     cout << "Book[" << index << "]: "
@@ -30,16 +36,24 @@ int main(int argc, char* argv[]) {
 
     int num_books;
     input >> num_books;
+    if (num_books>10) num_books=10;
     input.ignore(); // skip newline
 
-    // TODO: Create array of Book
-    // Book books[10];
+    Book books[10];
 
-    // TODO: Read books from input
-    // for (int i = 0; i < num_books; i++) { ... }
+    for(int i = 0; i < num_books; i++) {
+        
+        input.getline(books[i].title, 100); // read title
+        input.getline(books[i].author,100);
+        input >>books[i].year;
+        input >> books[i].pages; 
+        input.ignore(); // skip newline after pages
+        input.getline(books[i].isbn, 20); // read isbn
+    }
 
-    // TODO: Print books using print_book
-    // for (int i = 0; i < num_books; i++) { ... }
+    for(int i = 0; i < num_books; i++) {
+        print_book(i, books[i].title, books[i].author , books[i].year , books[i].pages, books[i].isbn);
+    }
 
     return 0;
 }
